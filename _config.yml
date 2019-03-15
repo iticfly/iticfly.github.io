@@ -4,8 +4,8 @@
 baseurl:
 url: https://iticfly.github.io
 date_format: "ordinal"
-title: 振翅方能飞翔呀
-subtitle: "勇往直前"
+title: 振翅终能飞翔
+subtitle: "可爱迷人郭先生"
 description: "这是一个忧伤的描述"
 keywords: 一个忧伤的关键字
 timezone: Asia/Shanghai
@@ -19,8 +19,8 @@ author: Zhuang Ma
 organization: 
 organization_url: 
 github_username: iticfly
-location: Wuhan, China
-email: chumpma@gmail.com
+location: shenzhen, China
+email: 546836536@qq.com
 
 # ---------------- #
 #    Navigation    #
@@ -93,8 +93,8 @@ gitment:
 gitalk:
     owner: iticfly
     repo: blog-comments
-    clientID: d2e1cbbd298958076462
-    clientSecret: b42a4178e5fd4a7cf63189ef4b1453b05c375709
+    clientID: d8010ff7597befb58e9a
+    clientSecret: 945a3129f69c0a80f79c17e03b7619880920e5d7
 # 在使用其它评论组件时可点击显示 Disqus
 lazy_load_disqus : false
 
