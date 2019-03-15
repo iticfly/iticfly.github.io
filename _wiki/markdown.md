@@ -18,14 +18,14 @@ mathjax: true
 ### 超链接
 
 ```
-[靠谱-ing](https://mazhuang.org)
+[靠谱-ing](https://iticfly.github.io)
 
-<https://mazhuang.org>
+<https://iticfly.github.io>
 ```
 
-[靠谱-ing](https://mazhuang.org)  
+[靠谱-ing](https://iticfly.github.io)  
 
-<https://mazhuang.org>
+<https://iticfly.github.io>
 
 ### 列表
 
