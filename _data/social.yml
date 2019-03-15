@@ -1,9 +1,9 @@
 - sitename: GitHub
-  name: mzlogin
-  url: https://github.com/mzlogin
+  name: iticfly
+  url: https://github.com/iticfly
 
 - sitename: 掘金
-  name: mzlogin
+  name: iticfly
   url: http://gold.xitu.io/user/570ddaeb2e958a005c63b2da
 
 - sitename: LinkedIn
@@ -15,12 +15,12 @@
   url: http://mazhuang.org
 
 - sitename: 微博
-  name: mzlogin
-  url: http://weibo.com/mzlogin
+  name: iticfly
+  url: http://weibo.com/iticfly
 
 - sitename: 知乎
-  name: mzlogin
-  url: http://www.zhihu.com/people/mzlogin
+  name: iticfly
+  url: http://www.zhihu.com/people/iticfly
 
 - sitename: 豆瓣
   name: 壮哥不胖
