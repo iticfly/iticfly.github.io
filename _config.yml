@@ -92,7 +92,7 @@ gitment:
 # https://github.com/gitalk/gitalk#install
 gitalk:
     owner: iticfly
-    repo: blog-comments
+    repo: iticfly
     clientID: d8010ff7597befb58e9a
     clientSecret: 945a3129f69c0a80f79c17e03b7619880920e5d7
 # 在使用其它评论组件时可点击显示 Disqus
