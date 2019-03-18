@@ -1,6 +1,4 @@
 ---
-
-
 layout: post
 title: 设计模式-代理模式
 categories: Gecko
@@ -83,16 +81,106 @@ public class Father implements Person {
 
 运行结果:
 
-```java
+```
 父母物色对象
 儿子要求:肤白貌美大长腿
 双方同意交往,确立交往
-
 ```
 
 在上述场景中,父亲作为执行者，儿子作为被代理者，对外是父亲(执行者)帮儿子(代理对象)相亲，保护了儿子(代理对象)**不对外暴露**，同时也对儿子(代理对象)的相亲行为做了前置增强和后置增强(**功能增强**)。
 
 对于分布式业务场景中,我们通常会对数据库进行分库分表，在对数据进行操作之前便可以进行前置设置数据源。
+
+
+
+#### 动态代理
+
+动态代理和静态对比基本思路是一致的，只不过动态代理功能更加强大，随着业务的扩
+展适应性更强。如果还以找对象为例，使用动态代理相当于是能够适应复杂的业务场景。
+不仅仅只是父亲给儿子找对象，如果找对象这项业务发展成了一个产业，进而出现了媒
+婆、婚介所等这样的形式。那么，此时用静态代理成本就更大了，需要一个更加通用的
+解决方案，要满足任何单身人士找对象的需求。我们升级一下代码，先来看 JDK 实现方
+式：
+
+创建媒婆(婚介)JDKMeipo类:
+
+```java
+public class JDKMeipo implements InvocationHandler {
+    private Person target;
+
+    public Object getInstance(Person target) {
+        this.target = target;
+        Class<? extends Person> clazz = target.getClass();
+        return Proxy.newProxyInstance(clazz.getClassLoader(), clazz.getInterfaces(), this);
+    }
+
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        before();
+        Object invoke = method.invoke(this.target, args);
+        after();
+        return invoke;
+    }
+
+    private void before() {
+        System.out.println("我是媒婆,我已经拿到你的需求了...");
+        System.out.println("开始物色...");
+    }
+
+    private void after() {
+        System.out.println("如果合适的话,就准备办事...");
+    }
+}
+```
+
+
+
+创建客户Customer类:
+
+```java
+public class Customer implements Person {
+    @Override
+    public void findLove() {
+        System.out.println("我是客户,我的要求是白富美...");
+    }
+}
+```
+
+测试类:
+
+```java
+public class DynamicProxyTest {
+    public static void main(String[] args) {
+        Person person = (Person) new JDKMeipo().getInstance(new Customer());
+        person.findLove();
+    }
+}
+```
+
+测试输出:
+
+```
+我是媒婆,我已经拿到你的需求了...
+开始物色...
+我是客户,我的要求是白富美...
+如果合适的话,就准备办事...
+```
+
+
+
+用户只要是进行相亲行为,都可以在媒婆(JDKMeipo)处创建代理对象,执行者便可以对代理对象的行为进行增强操作。
+
+#### 高仿真JDK Proxy手写实现
+
+既然 jdk 动态代理功能如此强大，那么它如何实现呢？我们来探究一下原理，并模仿  JDK Proxy 手写一个属于自己的动态代理。JDK  Proxy 采用字节重组，重新生成的对象来替换原始的对象以达到动态代理的效果。JDK Proxy生成对象的步骤如下:
+
+1. 拿到被代理对象的引用，并且通过反射的方式获取到它所实现的所有接口。
+2. JDK Proxy 重新生成一个新类，同时新类要实现被代理类所实现的所有接口。
+3. 动态生成 Java 代码，把新加的业务逻辑方法由一定的逻辑代码去维护。
+4. 编译新生成的 Java 代码.class。
+5. 再重新加载到 JVM 中运行。
+
+以上这个过程就叫字节码重组。JDK 中有一个规范，在 ClassPath 下只要是以 $  开头的 class 文件一般是自动生成的。 
 
 
 
