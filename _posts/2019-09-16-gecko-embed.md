@@ -1,3 +1,11 @@
+---
+layout: post
+title: 等待通知机制之wait()/notify()
+categories: Gecko
+description: jdk中Object类中notify/wait
+keywords: wait
+---
+
 # 等待通知机制之wait()/notify()
 
 ## 1.wait()/notify官方定义
