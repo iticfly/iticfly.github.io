@@ -10,8 +10,6 @@ keywords: wait
 
 ## 1.wait()/notify官方定义
 
-![1568276705093](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1568276705093.png)
-
 wait()/notify是Object类中方法，且定义为final级别(不可修改).
 
 jdk8中对wait()的注释为
@@ -133,7 +131,34 @@ public class TwoThreadWaitNotify extends Object {
 
 输出结果如下:
 
-![1568598140211](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\1568598140211.png)
+```java
+偶数线程抢到锁了
+偶数线程开始阻塞
+奇数线程抢到锁了
+奇数+-+奇数1
+奇数线程抢到锁了
+奇数线程开始阻塞
+偶数线程阻塞结束
+偶数线程抢到锁了
+偶数+-+偶数2
+偶数线程抢到锁了
+偶数线程开始阻塞
+奇数线程阻塞结束
+奇数线程抢到锁了
+奇数+-+奇数3
+奇数线程抢到锁了
+奇数线程开始阻塞
+偶数线程阻塞结束
+偶数线程抢到锁了
+偶数+-+偶数4
+偶数线程抢到锁了
+偶数线程开始阻塞
+奇数线程阻塞结束
+奇数线程抢到锁了
+奇数+-+奇数5
+```
+
+
 
 ## 5.小结
 
