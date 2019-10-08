@@ -61,4 +61,64 @@ keywords: 资金
 
 ![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/a8b7a5b49e24da1864dadc73827d8b2f.jpg](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/a8b7a5b49e24da1864dadc73827d8b2f.jpg)
 
+## 设计思路
 
+从整体来看，按照时序维度的先后，系统对账主要分为三阶段的工作。分别是**数据准备**、**数据核对**和**差错处理**。在对账专业概念中，数据核对和差错处理又叫**轧账**和**平账**。三个环节紧密相连，从前期准备、问题发现、问题处理三个角度展开对账工作。
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/bc86ff01f5b77705359852eb1d560e39.png](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/bc86ff01f5b77705359852eb1d560e39.png)
+
+### 数据准备
+
+在数据接入层，不同的第三方渠道会提供不同的数据接入方式。
+
+- 数据拉取:我们主动拉取数据，如ftp拉取csv或接口方式下载账单文件。如众邦银行；
+- 文件上传：我们主动将账单文件推送至第三方文件服务器，由第三方对账单数据进行解析。如中信银行；
+- 数据推送:接入方将数据通过ETL(Extract-Transform-Load)推送到第三方数据仓库，由第三方对账单数据解析。
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/3906ed666b8dc8db8ec79a59de70ee94.png](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/3906ed666b8dc8db8ec79a59de70ee94.png)
+
+### 数据核对（轧账）
+
+#### 1.对账批次
+
+一个批次代表一次对账操作，批次信息下会展示交易日单数、日交易额以及差错和缓冲数量。目前一个第三方渠道下一个批次；
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/d2c2f8fd4f305721778fd13267dee975.jpg](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/d2c2f8fd4f305721778fd13267dee975.jpg)
+
+#### 2.对账缓存
+
+对于平台支付成功但第三方渠道账单中不存在的流水记录，默认置于缓存池(最大缓存日期3天)。同时，缓存池中的数据也可被n+1日第三方渠道账单匹配。
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/3289d7b721943d31f13d2257f125ed36.jpg](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/3289d7b721943d31f13d2257f125ed36.jpg)
+
+#### 3.对账方式
+
+- **双边对账**:以双方的数据互为基准对账。既要保证结算数据为成功的，支付平台也要成功，又要保证支付平台数据为成功的，结算数据也要成功。
+
+#### 4.对账粒度
+
+- 明细对账：对双方的每条数据进行匹配，包括订单编号、交易金额、手续费金额等。清结算平台自定义出**银行漏单、平台漏单、平台状态不符、平台短款、平台长款**这几种差错类型。
+
+  ![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/f72cc8dd39f1713d5eaee7a3f6b7fbdf.jpg](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/f72cc8dd39f1713d5eaee7a3f6b7fbdf.jpg)
+
+#### 5.银行账单列表
+
+对每一个批次下第三方渠道的账单文件下载，解析为清结算统一识别适配的账单文件。方便在页面对数据进行比对、排错。
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/aee4a6eea3f039f4a93807e8f0de0ac7.jpg](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/aee4a6eea3f039f4a93807e8f0de0ac7.jpg)
+
+#### 6.对账时机
+
+不同的第三方渠道下对账策略不一样，需要根据定时任务手动适配不同渠道下对账时机。如众邦银行适配为n+1日12：00开始对账操作。
+
+
+
+### 差错处理（平帐）
+
+差错处理主要是对数据核对过程中发现的问题数据进行处理。我们会建立一个统一结构的差错记录，将数据核对发现的问题进行统一存储。差错记录中的数据会进行二次核对，避免由于日切等原因造成的问题错报。对于那些真实存在问题的数据我们会提供两种解决模式，如果是常见的问题，且有一套标准的解决方案的话，我们会把它系统化，采取系统自动修复的方式；如果系统无法自动修复，那么我们会进行系统报警，并进行人工处理。
+
+![https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/fd3d6097da4ac0b4ce010e40696f203c.png](https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/fd3d6097da4ac0b4ce010e40696f203c.png)
+
+## 小结
+
+这是一个没有小结的小结。-_-
