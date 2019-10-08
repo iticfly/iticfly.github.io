@@ -59,6 +59,6 @@ keywords: 资金
 
 清结算中心作为资金交付落地的中转中心,上游对接了类似鲜茧采购,ERP结算系统,OMS订单系统,虚拟户划转等外部系统,下游又对接了如茧丝-众邦支付,白糖-中信支付,茧丝-货款等多个支付渠道,不仅承上启下,而且同时对接处理多种信息流数据,系统的高度复杂性给对账的全面性和准确性造成了极大的困难,如图:
 
-![blob:http://seed.ap-ec.cn/954cb323-fe2b-4f4f-9b71-de0c536808ff](blob:http://seed.ap-ec.cn/954cb323-fe2b-4f4f-9b71-de0c536808ff)
+![blob:http://seed.ap-ec.cn/7d32fa0e-7ffd-4894-a064-af0ec0811b22](blob:http://seed.ap-ec.cn/7d32fa0e-7ffd-4894-a064-af0ec0811b22)
 
 
