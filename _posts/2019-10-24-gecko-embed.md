@@ -40,7 +40,7 @@ keywords: 资金
 
 #### 渠道支付指令
 
-![](C:\Users\Administrator\Desktop\渠道支付指令.png)
+![]( https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/f9a5758eb1ceaf02f83a9d252cdb4e06.png )
 
 如上所示，账户是支付指令的基础，将账户信息维护在平台内部统一管理，可以保证交易订单有帐可查、有帐可对、有帐可控。
 
@@ -48,7 +48,7 @@ keywords: 资金
 
 #### 收银台账户管理
 
-![](C:\Users\Administrator\Desktop\收银台账户列表.jpg)
+![]( https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/c8860de81fbf23cc0ec079dda468e8bf.jpg )
 
 如上所示，支付方式中会展示出满足要求的所有账户列表，这些账户都维护在平台账户模块，可以在账户的控制属性(是否允许支付、是否允许代付、是否冻结)下进行权限分配等信息。
 
@@ -58,7 +58,7 @@ keywords: 资金
 
 随着货款线上化出入金的推进，账户对账是资金安全的一道重要保障。账户对账的是在账户交易流水上建立的双边对账，主要对账户的日终余额和日交易进行对账处理，这些都是建立在账户体系下实现的。
 
-![](C:\Users\Administrator\Desktop\对账与账户关联.jpg)
+![]( https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/fda66943aa3a2615bde78e0d87b5fd1a.jpg )
 
 ### 账单与支付账户的关联性
 
@@ -66,7 +66,7 @@ keywords: 资金
 
 目前账单信息直接与平台用户信息、付款账号关联，关联数据较单一，且存在耦合字段较多，不利于业务和代码维护。让账单信息直接与账户关联，通过多表关联查询，可以有效解决这一问题。
 
-![](C:\Users\Administrator\Desktop\对账与账户关联.jpg)
+![]( https://magpie-pic.oss-cn-shenzhen.aliyuncs.com/e1b5c9af9682a396cfe934300e11ad5c.jpg )
 
 ## 小结
 
